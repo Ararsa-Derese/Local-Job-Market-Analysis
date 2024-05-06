@@ -22,8 +22,6 @@ indices = pd.Series(df1.index, index=df1['jobtitle']).drop_duplicates()
 def get_recommendations(title, cosine_sim=cosine_sim):
   idx = indices[title]
   sim_scores = list(enumerate(cosine_sim[idx]))
-  if isinstance(sim_scores, np.ndarray):
-    sim_scores = sim_scores.tolist()
 
 
   sim_scores.sort(key=lambda x: x[1], reverse=True)
