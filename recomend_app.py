@@ -25,7 +25,7 @@ def get_recommendations(title, cosine_sim=cosine_sim):
   sim_scores = sorted(sim_scores, key=lambda X: X[1], reverse=True)
   sim_scores = sim_scores[1:16]
   tech_indices = [i[0] for i in sim_scores]
-  return df1['jobtitle'].iloc[tech_indices]
+  return df1['jobdescription'].iloc[tech_indices]
 
 
 
