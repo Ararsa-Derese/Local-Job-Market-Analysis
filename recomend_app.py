@@ -32,7 +32,7 @@ def get_recommendations(title, cosine_sim=cosine_sim):
 st.header('tech jobs recommender')
 movies = pd.read_pickle('job_list.pkl')
 similarity= pd.read_pickle('similarity.pkl')
-toon_list = movies['jobtitle'].values
+toon_list = movies['jobdescription'].values
 selected_toon = st.selectbox(
     "Type or select a job from the dropdown",
     toon_list
