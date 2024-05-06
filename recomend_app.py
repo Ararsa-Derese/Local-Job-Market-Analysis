@@ -22,6 +22,8 @@ indices = pd.Series(df1.index, index=df1['jobtitle']).drop_duplicates()
 def get_recommendations(title, cosine_sim=cosine_sim):
   idx = indices[title]
   sim_scores = list(enumerate(cosine_sim[idx]))
+  if sim_scores is None:
+    return None
   sim_scores = sorted(sim_scores, key=lambda X: X[1], reverse=True)
   sim_scores = sim_scores[1:16]
   tech_indices = [i[0] for i in sim_scores]
