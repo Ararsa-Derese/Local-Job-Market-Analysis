@@ -41,8 +41,11 @@ selected_toon = st.selectbox(
 
 if st.button('Show Recommendation'):
     recommended_toon_names = get_recommendations(selected_toon)
-    for i in recommended_toon_names:
-        st.subheader(i)
+    if recommended_toon_names is None:
+        st.write("No Recommendations Found")
+    else:
+      for i in recommended_toon_names:
+          st.subheader(i)
         
 
 
