@@ -30,8 +30,14 @@ def get_recommendations(title, cosine_sim=cosine_sim):
 
 
 st.header('tech jobs recommender')
-movies = pickle.load(open('job_list.pkl','rb'))
-similarity = pickle.load(open('similarity.pkl','rb'))
+with open('job_list.pkl', 'rb') as f:
+    # The protocol version used is detected automatically, so we do not
+    # have to specify it.
+    movies = pickle.load(f)
+with open('similarit.okl', 'rb') as f:
+    # The protocol version used is detected automatically, so we do not
+    # have to specify it.
+    similarity = pickle.load(f)
 
 toon_list = movies['jobtitle'].values
 selected_toon = st.selectbox(
