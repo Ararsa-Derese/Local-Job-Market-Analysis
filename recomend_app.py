@@ -22,8 +22,15 @@ indices = pd.Series(df1.index, index=df1['jobtitle']).drop_duplicates()
 def get_recommendations(title, cosine_sim=cosine_sim):
   idx = indices[title]
   sim_scores = list(enumerate(cosine_sim[idx]))
-  if sim_scores is None:
-    return None
+  if isinstance(sim_scores, np.ndarray):
+    sim_scores = sim_scores.tolist()
+
+# Check if the elements in sim_scores are arrays or single values
+  for item, score in sim_scores:
+      if isinstance(score, np.ndarray):
+          # Handle if score is an array
+          # For example, if you want to take the mean of the array
+          score = np.mean(score)
   sim_scores = sorted(sim_scores, key=lambda X: X[1], reverse=True)
   sim_scores = sim_scores[1:16]
   tech_indices = [i[0] for i in sim_scores]
