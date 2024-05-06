@@ -18,10 +18,17 @@ tdif_matrix.shape
 from sklearn.metrics.pairwise import sigmoid_kernel
 
 cosine_sim = sigmoid_kernel(tdif_matrix, tdif_matrix)
-indices = pd.Series(df1.index, index=df1['jobtitle']).drop_duplicates()
+indices = (pd.Series(df1.index, index=df1['jobtitle']).drop_duplicates())
 def get_recommendations(title, cosine_sim=cosine_sim):
   idx = indices[title]
   sim_scores = list(enumerate(cosine_sim[idx]))
+
+  print(sim_scores)
+  for item, score in sim_scores:
+    if isinstance(score, np.ndarray):
+        score = np.mean(score)
+    sim_scores[item] = (item, score)
+
 
 
   sim_scores.sort(key=lambda x: x[1], reverse=True)
